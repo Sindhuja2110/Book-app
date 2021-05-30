@@ -38,9 +38,42 @@ public class BookDAOImpl implements BookDAO {
 				bookSet.add(Book);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			e.printStackTrace();}
 		return bookSet;
+	}	
+		
+		
+		@Override
+		public Book findById(int id) {
+			Book book = null;
+			try {
+				pstmt = con.prepareStatement("select * from book_2612 where id=?");
+				pstmt.setInt(1, id);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					book = new Book(rs.getInt("id"), rs.getString("name"), rs.getDate("publisheddate").toLocalDate());
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return book;
+		}
+
+		@Override
+		public Book findByName(String name) {
+			Book book = null;
+			try {
+				pstmt = con.prepareStatement("select * from book_2612 where name=?");
+				pstmt.setString(1, name);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					book = new Book(rs.getInt("id"), rs.getString("name"), rs.getDate("publisheddate").toLocalDate());
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return book;
 	}	
 	
 }
