@@ -1,6 +1,7 @@
 package com.chainsys.book.test;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -20,6 +21,8 @@ public class BookClient {
 		DateTimeFormatter dateFormat;
 		int id;
 		String name;
+		List<String> namelist;
+		List<Integer> idlist;
 		
 		System.out.println("Enter the choice");
 		Scanner scanner = new Scanner(System.in);
@@ -31,8 +34,8 @@ public class BookClient {
 			System.out.println(bookSet);
 			break;
 		case 2:
-			System.out.println("Find the Product By Id");
-			System.out.println("Enter the Product Id");
+			System.out.println("Find the Book By Id");
+			System.out.println("Enter the Book Id");
 			id = scanner.nextInt();
 			try {
 				Book book = service.findById(id);
@@ -41,15 +44,29 @@ public class BookClient {
 			}
 			break;
 		case 3:
-			System.out.println("Find the Product By Name");
-			System.out.println("Enter the Product Name");
-			String Name = scanner.next();
+			System.out.println("Find the Book By Name");
+			System.out.println("Enter the Book Name");
+			String Book_Name = scanner.next();
 			try {
-				Book book = service.findByName(Name);
+				Book book = service.findByName(Book_Name);
 				System.out.println(book);
 			} catch (BookNotFoundException e) {
 			}
 			break;
+			
+		case 4:
+			System.out.println("Find All Book Names");
+			namelist = service.findAllName();
+			System.out.println(namelist);
+			break;
+		case 5:
+			System.out.println("Find All Book Id");
+			idlist = service.findAllId();
+			System.out.println(idlist);
+			break;
+			
+			
+			
 	default:
 				break;
 				

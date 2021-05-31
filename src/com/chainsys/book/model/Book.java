@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Book {
 	private int book_id;
-	private String name;
+	private String Book_name;
 	private LocalDate publishDate;
 	public Book() {
 		super();
@@ -13,7 +13,7 @@ public class Book {
 	public Book(int book_id, String name, LocalDate publishDate) {
 		super();
 		this.book_id = book_id;
-		this.name = name;
+		this.Book_name =name;
 		this.publishDate = publishDate;
 	}
 	public int getBook_id() {
@@ -23,10 +23,10 @@ public class Book {
 		this.book_id = book_id;
 	}
 	public String getName() {
-		return name;
+		return Book_name;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.Book_name = name;
 	}
 	public LocalDate getPublishDate() {
 		return publishDate;
@@ -39,7 +39,7 @@ public class Book {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + book_id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((Book_name == null) ? 0 : Book_name.hashCode());
 		result = prime * result + ((publishDate == null) ? 0 : publishDate.hashCode());
 		return result;
 	}
@@ -54,10 +54,10 @@ public class Book {
 		Book other = (Book) obj;
 		if (book_id != other.book_id)
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (Book_name == null) {
+			if (other.Book_name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!Book_name.equals(other.Book_name))
 			return false;
 		if (publishDate == null) {
 			if (other.publishDate != null)
@@ -68,7 +68,7 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		return "Book [book_id=" + book_id + ", name=" + name + ", publishDate=" + publishDate + "]";
+		return "Book [book_id=" + book_id + ", name=" + Book_name + ", publishDate=" + publishDate + "]";
 	}
 	
 
