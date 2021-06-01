@@ -1,5 +1,7 @@
 package com.chainsys.book.test;
 
+import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +11,7 @@ import com.chainsys.book.exception.BookNotFoundException;
 import com.chainsys.book.model.Book;
 import com.chainsys.book.service.BookService;
 import com.chainsys.book.service.BookServiceImpl;
+
 
 
 
@@ -65,7 +68,15 @@ public class BookClient {
 			System.out.println(idlist);
 			break;
 			
-			
+		case 6:
+			System.out.println("Adding a Product");
+			date = "06/05/2019";
+			dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+			Book newProduct = new Book(104, "java", LocalDate.parse(date, dateFormat));
+			service.save(newProduct);
+			bookSet = service.findAll();
+			System.out.println(bookSet);
+			break;
 			
 	default:
 				break;

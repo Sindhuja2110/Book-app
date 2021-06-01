@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.chainsys.book.model.Book;
+
 
 public class BookDAOImpl implements BookDAO {
 	private static Connection con;
@@ -110,23 +110,46 @@ public class BookDAOImpl implements BookDAO {
 			}
 			return idlist;
 		}
+		
 		@Override
-		public Book findByDate(LocalDate PUBLISH_DATE) {
-			Book Book = null;
+		public void save(Book Book) {
 			try {
-				pstmt = con.prepareStatement("select * from book_2612 where expiry_date=?");
-				pstmt.setDate(1, Date.valueOf(PUBLISH_DATE));
-				rs = pstmt.executeQuery();
-				if (rs.next()) {
-					Book = new Book(rs.getInt("BOOK_ID"), rs.getString("BOOK_NAME"), rs.getDate("PUBLISH_DATE").toLocalDate());
-				}
+				pstmt = con.prepareStatement("insert into Book_2612 values(?,?,?)");
+				pstmt.setInt(1, Book.getBook_id());
+				pstmt.setString(2, Book.getName());
+				pstmt.setDate(3, Date.valueOf(Book.getPublishDate()));
+				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
-			return Book;
+		}
+		@Override
+		public void update(Book Book) {
+			try {
+				pstmt = con.prepareStatement("update Book_2612 set book_name=? where book_id=?");
+				pstmt.setString(1, Book.getName());
+				pstmt.setInt(2, Book.getBook_id());
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
+		@Override
+		public void delete(int id) {
+			try {
+				pstmt = con.prepareStatement("delete Book_2612 where book_id=?");
+				pstmt.setInt(1, id);
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+
+		}
 		
-	
-}
+		
+		
+	}

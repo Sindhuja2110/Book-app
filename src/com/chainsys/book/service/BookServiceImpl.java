@@ -11,6 +11,7 @@ import com.chainsys.book.exception.BookNotFoundException;
 import com.chainsys.book.model.Book;
 
 
+
 public class BookServiceImpl implements BookService {
 	private static BookDAO dao;
 
@@ -52,14 +53,30 @@ public class BookServiceImpl implements BookService {
 		return dao.findAllId();
 	}
 	@Override
-	public Book findByDate(LocalDate PUBLISH_DATE) throws BookNotFoundException {
-		Book Book = dao.findByDate( PUBLISH_DATE);
-		if (Book == null) {
-			throw new BookNotFoundException("Product  Not Found");
+	public void save(Book Book) {
+		dao.save(Book);
+
+	}
+
+	@Override
+	public void update(Book Book) throws BookNotFoundException {
+		Book result = dao.findById(Book.getBook_id());
+		if (result == null) {
+			throw new BookNotFoundException("Product Id Not Found");
 		} else {
-			return Book;
+			dao.update(Book);
 		}
 
+	}
+
+	@Override
+	public void delete(int id) throws BookNotFoundException {
+		Book Product = dao.findById(id);
+		if (Product == null) {
+			throw new BookNotFoundException("Product doesn't exist!!");
+		} else {
+			dao.delete(id);
+		}
 	}
 	
 }
